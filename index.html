@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<h1>router1\n/interface wireless
+<h3>/interface wireless
 set [ find default-name=wlan1 ] disabled=no mode=ap-bridge ssid=nama-kamu
 /interface vlan
 add interface=ether2 name=vlan1 vlan-id=10
@@ -52,10 +52,8 @@ add name=siswa password=789 server=hotspot1
 set time-zone-name=Asia/Jakarta
 /system routerboard settings
 set init-delay=0s protected-routerboot=disabled
-</h1>
-\n
-\n
-<h2>router2\n/interface bridge
+</h3>
+<p>/interface bridge
 add name=bridge1 vlan-filtering=yes
 /interface wireless
 set [ find default-name=wlan1 ] ssid=MikroTik
@@ -69,7 +67,7 @@ add bridge=bridge1 hw=no interface=ether4 pvid=20
 /interface bridge vlan
 add bridge=bridge1 tagged=ether1 untagged=ether3,ether2 vlan-ids=10
 add bridge=bridge1 tagged=ether1 untagged=ether4 vlan-ids=20
-</h2>
+</p>
 
 </body>
 </html>
