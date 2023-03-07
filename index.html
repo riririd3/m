@@ -2,9 +2,7 @@
 <html>
 <body>
 
-<h1>router1
-
-/interface wireless
+<h1>router1\n/interface wireless
 set [ find default-name=wlan1 ] disabled=no mode=ap-bridge ssid=nama-kamu
 /interface vlan
 add interface=ether2 name=vlan1 vlan-id=10
@@ -55,11 +53,9 @@ set time-zone-name=Asia/Jakarta
 /system routerboard settings
 set init-delay=0s protected-routerboot=disabled
 </h1>
-
-
-<h2>router2
-
-/interface bridge
+\n
+\n
+<h2>router2\n/interface bridge
 add name=bridge1 vlan-filtering=yes
 /interface wireless
 set [ find default-name=wlan1 ] ssid=MikroTik
