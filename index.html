@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>router1
+
+/interface wireless
+set [ find default-name=wlan1 ] disabled=no mode=ap-bridge ssid=nama-kamu
+/interface vlan
+add interface=ether2 name=vlan1 vlan-id=10
+add interface=ether2 name=vlan2 vlan-id=20
+/ip hotspot profile
+add hotspot-address=192.168.80.1 name=hsprof1
+/ip hotspot user profile
+set [ find default=yes ] shared-users=10
+/ip pool
+add name=dhcp_pool1 ranges=192.168.40.2-192.168.40.254
+add name=dhcp_pool2 ranges=192.168.60.2-192.168.60.254
+add name=dhcp_pool3 ranges=192.168.80.2-192.168.80.254
+/ip dhcp-server
+add address-pool=dhcp_pool1 disabled=no interface=vlan1 name=dhcp1
+add address-pool=dhcp_pool2 disabled=no interface=vlan2 name=dhcp2
+add address-pool=dhcp_pool3 disabled=no interface=wlan1 name=dhcp3
+/ip hotspot
+add address-pool=dhcp_pool3 disabled=no interface=wlan1 name=hotspot1 \
+    profile=hsprof1
+/ip address
+add address=192.168.40.1/24 interface=vlan1 network=192.168.40.0
+add address=192.168.60.1/24 interface=vlan2 network=192.168.60.0
+add address=192.168.80.1/24 interface=wlan1 network=192.168.80.0
+/ip dhcp-client
+add dhcp-options=hostname,clientid disabled=no interface=ether1
+/ip dhcp-server network
+add address=192.168.40.0/24 gateway=192.168.40.1
+add address=192.168.60.0/24 gateway=192.168.60.1
+add address=192.168.80.0/24 gateway=192.168.80.1
+/ip dns
+set allow-remote-requests=yes
+/ip firewall filter
+add action=passthrough chain=unused-hs-chain comment=\
+    "place hotspot rules here" disabled=yes
+/ip firewall nat
+add action=passthrough chain=unused-hs-chain comment=\
+    "place hotspot rules here" disabled=yes
+add action=masquerade chain=srcnat out-interface=ether1
+add action=masquerade chain=srcnat comment="masquerade hotspot network" \
+    src-address=192.168.80.0/24
+/ip hotspot user
+add name=admin
+add name=guru password=456 server=hotspot1
+add name=kepala password=123 server=hotspot1
+add name=siswa password=789 server=hotspot1
+/system clock
+set time-zone-name=Asia/Jakarta
+/system routerboard settings
+set init-delay=0s protected-routerboot=disabled
+</h1>
+
+
+<h2>router2
+
+/interface bridge
+add name=bridge1 vlan-filtering=yes
+/interface wireless
+set [ find default-name=wlan1 ] ssid=MikroTik
+/interface wireless security-profiles
+set [ find default=yes ] supplicant-identity=MikroTik
+/interface bridge port
+add bridge=bridge1 hw=no interface=ether1
+add bridge=bridge1 hw=no interface=ether2 pvid=10
+add bridge=bridge1 hw=no interface=ether3 pvid=10
+add bridge=bridge1 hw=no interface=ether4 pvid=20
+/interface bridge vlan
+add bridge=bridge1 tagged=ether1 untagged=ether3,ether2 vlan-ids=10
+add bridge=bridge1 tagged=ether1 untagged=ether4 vlan-ids=20
+</h2>
+
+</body>
+</html>
