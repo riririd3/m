@@ -4,114 +4,35 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1">
 <style>
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 140px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-border-radius: 6px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 150%;
-  left: 50%;
-  margin-left: -75px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-}
+.container { position: relative; text-align: left; } 
+.content { background-color: #292828; border-radius: 5px; color: #fff; font-family: monaco; min-height: 50px; padding: 20px; } 
+.content::after { content: "Copy"; color: #000; background-color: #ffd700; cursor: pointer; padding: 3px 10px; position: absolute; right: 0; top: 0; } 
+.textarea { resize: none; } /* */ 
+.tooltip { position: relative; display: inline-block; } 
+.tooltip .tooltiptext { visibility: hidden; width: 140px; background-color: #555; color: #fff; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 150%; left: 50%; margin-left: -75px; opacity: 0; transition: opacity 0.3s; } 
+.tooltip .tooltiptext::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #555 transparent transparent transparent; } 
+.tooltip:hover .tooltiptext { visibility: visible; opacity: 1; }
 </style>
-</head>
 <body>
-
-<h1>Router 1</h1><br>
-<input type="text" value="/interface wireless<br>
-set [ find default-name=wlan1 ] disabled=no mode=ap-bridge ssid=nama-kamu<br>
-/interface vlan<br>
-add interface=ether2 name=vlan1 vlan-id=10<br>
-add interface=ether2 name=vlan2 vlan-id=20<br>
-/ip hotspot profile<br>
-add hotspot-address=192.168.80.1 name=hsprof1<br>
-/ip hotspot user profile<br>
-set [ find default=yes ] shared-users=10<br>
-/ip pool<br>
-add name=dhcp_pool1 ranges=192.168.40.2-192.168.40.254<br>
-add name=dhcp_pool2 ranges=192.168.60.2-192.168.60.254<br>
-add name=dhcp_pool3 ranges=192.168.80.2-192.168.80.254<br>
-/ip dhcp-server<br>
-add address-pool=dhcp_pool1 disabled=no interface=vlan1 name=dhcp1<br>
-add address-pool=dhcp_pool2 disabled=no interface=vlan2 name=dhcp2<br>
-add address-pool=dhcp_pool3 disabled=no interface=wlan1 name=dhcp3<br>
-/ip hotspot<br>
-add address-pool=dhcp_pool3 disabled=no interface=wlan1 name=hotspot1 \
-    profile=hsprof1<br>
-/ip address<br>
-add address=192.168.40.1/24 interface=vlan1 network=192.168.40.0<br>
-add address=192.168.60.1/24 interface=vlan2 network=192.168.60.0<br>
-add address=192.168.80.1/24 interface=wlan1 network=192.168.80.0<br>
-/ip dhcp-client<br>
-add dhcp-options=hostname,clientid disabled=no interface=ether1<br>
-/ip dhcp-server network<br>
-add address=192.168.40.0/24 gateway=192.168.40.1<br>
-add address=192.168.60.0/24 gateway=192.168.60.1<br>
-add address=192.168.80.0/24 gateway=192.168.80.1<br>
-/ip dns<br>
-set allow-remote-requests=yes<br>
-/ip firewall filter<br>
-add action=passthrough chain=unused-hs-chain comment=\
-    "place hotspot rules here" disabled=yes<br>
-/ip firewall nat<br>
-add action=passthrough chain=unused-hs-chain comment=\
-    "place hotspot rules here" disabled=yes<br>
-add action=masquerade chain=srcnat out-interface=ether1<br>
-add action=masquerade chain=srcnat comment="masquerade hotspot network" \
-    src-address=192.168.80.0/24<br>
-/ip hotspot user<br>
-add name=admin<br>
-add name=guru password=456 server=hotspot1<br>
-add name=kepala password=123 server=hotspot1<br>
-add name=siswa password=789 server=hotspot1<br>
-/system clock<br>
-set time-zone-name=Asia/Jakarta<br>
-/system routerboard settings<br>
-set init-delay=0s protected-routerboot=disabled" id="myInput">
-<div class="tooltip">
-<button onclick="myFunction()" onmouseout="outFunc()">
-  <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-  Klik Disini
-  </button>
-</div>
-<script>
-function myFunction() {
-  var copyText = document.getElementById("myInput");
-  copyText.select();
-copyText.setSelectionRange(0, 99999);
-  navigator.clipboard.writeText(copyText.value);
-  var tooltip = document.getElementById("myTooltip");
-  tooltip.innerHTML = "Sip, Tinggal Paste";
-}
-function outFunc() {
-  var tooltip = document.getElementById("myTooltip");
-tooltip.innerHTML = "Copy to clipboard";
-}
-</script>
+<section class="container"> 
+<pre class="content"> 
+<code class="code"> Hey! I just copied something; </code> </pre> </section> 
+<section class="container"> 
+<pre class="content"> 
+<code class="code"> Hey! I just copied another; </code> </pre> </section> 
+<div class="tooltip"> 
+<span class="tooltiptext" id="myTooltip">Copy to clipboard</span> </div>
 </body>
+<script>
+document.querySelectorAll(".content").forEach((item, index) => {
+item.addEventListener("click", async (event) => { 
+if (!navigator.clipboard) {
+return; 
+} 
+try { 
+await
+navigator.clipboard.writeText(event.target.innerText); 
+alert("Copied to clipboard"); 
+var tooltip = document.getElementById("myTooltip"); tooltip.innerHTML = "Copied" } catch (err) { console.error("Failed to copy!", err); } }); });
+</script>
 </html>
