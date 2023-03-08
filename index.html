@@ -3,11 +3,11 @@
 <head>
 <meta name="viewport"
 content="width=device-width, initial-scale=1">
-<p>Router 1 atas, Router 2 bawah.<br>Ganti nama wifi (ssid) dengan nama kamu!</p>
+<p>Router 1.<br>Ganti nama wifi (ssid) dengan nama kamu!</p>
 <style>
 .container { position: relative; text-align: left; } 
-.content { background-color: #292828; border-radius: 5px; color: #fff; font-family: monaco; min-height: 50px; padding: 20px; } 
-.content::after { content: "Copy"; color: #000; background-color: #ffd700; cursor: pointer; padding: 3px 10px; position: absolute; right: 0; top: 0; } 
+.content { background-color: #ffffff; border-radius: 5px; color: #fff; font-family: monaco; min-height: 50px; padding: 20px; } 
+.content::after { content: "Klik"; color: #000; background-color: #00ff00; cursor: pointer; padding: 3px 10px; position: absolute; right: 0; top: 0; } 
 .textarea { resize: none; } /* */ 
 .tooltip { position: relative; display: inline-block; } 
 .tooltip .tooltiptext { visibility: hidden; width: 140px; background-color: #555; color: #fff; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 150%; left: 50%; margin-left: -75px; opacity: 0; transition: opacity 0.3s; } 
@@ -66,7 +66,8 @@ add name=siswa password=789 server=hotspot1
 /system clock
 set time-zone-name=Asia/Jakarta
 /system routerboard settings
-set init-delay=0s protected-routerboot=disabled; </code> </pre> </section> 
+set init-delay=0s protected-routerboot=disabled; </code> </pre> </section>
+<br> <p>Router 2.<br>Pastikan yang ada "vlans"nya di menu "bridge"</p> 
 <section class="container"> 
 <pre class="content"> 
 <code class="code"> /interface bridge
@@ -95,7 +96,7 @@ return;
 try { 
 await
 navigator.clipboard.writeText(event.target.innerText); 
-alert("Copied to clipboard"); 
+alert("Sip, tinggal paste wkwk"); 
 var tooltip = document.getElementById("myTooltip"); tooltip.innerHTML = "Sip, tinggal paste wkwk" } catch (err) { console.error("Gagal copy, coba lagi!", err); } }); });
 </script>
 </html>
