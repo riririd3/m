@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport"
 content="width=device-width, initial-scale=1">
+<p>link alternatif: klik <a href="https://riririd3.github.io/m/alt">disini<\a><\p><br>
 <p>Router 1.<br>Ganti nama wifi (ssid) dengan nama kamu!</p>
 <style>
 .container { position: relative; text-align: left; } 
@@ -17,7 +18,7 @@ content="width=device-width, initial-scale=1">
 <body>
 <section class="container"> 
 <pre class="content"> 
-<code class="code"> /interface wireless
+<code class="code">/interface wireless
 set [ find default-name=wlan1 ] disabled=no mode=ap-bridge ssid=nama-kamu
 /interface vlan
 add interface=ether2 name=vlan1 vlan-id=10
@@ -70,7 +71,7 @@ set init-delay=0s protected-routerboot=disabled; </code> </pre> </section>
 <br> <p>Router 2.<br>Pastikan yang ada "vlans"nya di menu "bridge"</p> 
 <section class="container"> 
 <pre class="content"> 
-<code class="code"> /interface bridge
+<code class="code">/interface bridge
 add name=bridge1 vlan-filtering=yes
 /interface wireless
 set [ find default-name=wlan1 ] ssid=MikroTik
